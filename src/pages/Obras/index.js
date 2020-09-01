@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ImageBackground, Text, Image, StyleSheet } from 'react-native';
+import { View, ImageBackground, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Header } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 const Obras = () =>{

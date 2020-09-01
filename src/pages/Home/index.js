@@ -8,8 +8,8 @@ import { Header, Image } from 'react-native-elements';
 
 const Home = () =>{
         const navigation = useNavigation();
-        function hundleObras() {
-            navigation.navigate('Obras');
+        function hundleLogin() {
+            navigation.navigate('Login');
         }
         return(
         <>
@@ -18,7 +18,7 @@ const Home = () =>{
             barStyle="light-content" // or directly
             leftComponent={{icon: 'menu', color: '#fff'}}
             centerComponent={{ text: 'SOUSA OLIVEIRA', style: { color: '#fff' } }}
-            rightComponent={{ icon: 'home', color: '#fff', onPress: hundleObras}}
+            rightComponent={{ icon: 'home', color: '#fff', onPress: hundleLogin}}
             containerStyle={{
               backgroundColor: '#3D6DCC',
               justifyContent: 'space-around',
@@ -26,7 +26,7 @@ const Home = () =>{
         />
         <Image
             source={require('../../assets/logo.png')}
-            style={{ width: 420, height: 580, top: '30%', opacity: 0.5,}}
+            style={{ width: 420, height: 580, top: '30%', opacity: 0.5}}
             PlaceholderContent={<ActivityIndicator />}
         />
         </>
