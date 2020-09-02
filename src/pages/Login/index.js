@@ -1,17 +1,21 @@
 import React, {useState, useEffect} from 'react'
-import { KeyboardAvoidingView, Text, View, TextInput,StyleSheet, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { KeyboardAvoidingView, Text, View, TextInput,StyleSheet, ActivityIndicator, TouchableOpacity, AsyncStorage } from 'react-native';
 import { RectButton} from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { Header, Image } from 'react-native-elements';
 
 
-const Login = () =>{
+
+const Login = ({navigation}) =>{
 
     const [display, setDisplay] = useState();
     const [user, setUser] = useState();
     const [password, setPassword] = useState();
     const [login, setLogin] = useState();    
 
+    async function recSenha(){
+        
+    }
     async function sendForm(){
         let response=await fetch ('http://192.168.1.7:3000/login', {
             method: 'POST',
@@ -26,12 +30,15 @@ const Login = () =>{
             })
         })
         let json = await response.json();
-        console.log(json);
         if( json === 'failed'){
             setDisplay('flex');
             setTimeout(() => {
                 setDisplay('none');
             }, 3000);
+            await AsyncStorage.clear();
+        }else{
+            let userData= await AsyncStorage.setItem('userData', JSON.stringify(json));
+            navigation.navigate('Home');
         }
     }
     
@@ -50,19 +57,23 @@ const Login = () =>{
                     </Text>
                 </View>
                 <View style={styles.login_form}>
-                    <TextInput placeholder='Usuário:' style={styles.login_input} onChangeText={text=>setUser(text)}/>
-                    <TextInput placeholder='Senha:' secureTextEntry={true} style={styles.login_input} onChangeText={text=>setPassword(text)}/>
-
+                    <TextInput placeholder='Usuário' style={styles.login_input} onChangeText={text=>setUser(text)}/>
+                    <TextInput placeholder='Senha' secureTextEntry={true} style={styles.login_input} onChangeText={text=>setPassword(text)}/>
+                <View>
                     <TouchableOpacity style={styles.login_button} onPress={()=>sendForm()}>
                         <Text style={styles.login_buttonText}>Entrar</Text>
                     </TouchableOpacity>
+                    <TouchableOpacity style={styles.login_buttonRec} onPress={()=>recSenha()}>
+                        <Text style={styles.login_buttonTextRec}>Esqueceu a Senha?</Text>
+                    </TouchableOpacity>
+                </View>
                 </View>
             </KeyboardAvoidingView>
         )
 }
 const styles = StyleSheet.create({
     back: {
-        backgroundColor: "#333",
+        
     },
     login_msg:(text='none')=>({
         fontWeight: 'bold',
@@ -79,21 +90,40 @@ const styles = StyleSheet.create({
         marginBottom: 15,
     },
     login_input: {
-        backgroundColor: '#fff',
+        backgroundColor: '#3A3538',
         fontSize: 19,
-        padding: 7, 
+        padding: 10, 
         marginBottom: 15,
+        color: '#d3d3d3',
+        borderRadius: 9,
     },
     login_button: {
-        padding: 12,
-        backgroundColor: 'blue',
+        padding: 15,
+        width: '100%',
+        backgroundColor: '#8A8C9A',
         alignSelf: "center",
+        alignItems:"center",
         borderRadius: 5,
+        marginBottom: 10,
+    },
+    login_buttonRec: {
+        padding: 15,
+        width: '100%',
+        alignSelf: "center",
+        alignItems:"center",
+        marginBottom: 10,
+    },
+
+
+    login_buttonTextRec: {
+        fontWeight: "bold",
+        fontSize: 22,
+        color: '#3A3538',
     },
     login_buttonText: {
         fontWeight: "bold",
         fontSize: 22,
-        color: '#333'
+        color: '#3A3538',
     },
     container: {
         flex: 1,

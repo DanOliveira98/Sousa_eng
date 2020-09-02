@@ -13,9 +13,9 @@ const Routes = () => {
     return (
         <NavigationContainer>
             <appStack.Navigator headerMode="none">
+                <appStack.Screen name="Login" component={Login}/>
                 <appStack.Screen name="Home" component={Home}/>
                 <appStack.Screen name="Obras" component={Obras}/>
-                <appStack.Screen name="Login" component={Login}/>
             </appStack.Navigator>
         </NavigationContainer>
     );

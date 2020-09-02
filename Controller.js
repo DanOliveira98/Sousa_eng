@@ -21,7 +21,6 @@ app.get('/create', async(req, res)=>{
         createdAt: new Date(),
         updatedAt: new Date(),
     });
-    res.send("Agora foi");
 })
 
 app.get('/selected', async(req, res)=>{
