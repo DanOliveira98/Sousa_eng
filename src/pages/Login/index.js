@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import { Header, Image } from 'react-native-elements';
 
 
-
 const Login = ({navigation}) =>{
 
     const [display, setDisplay] = useState();
@@ -17,7 +16,7 @@ const Login = ({navigation}) =>{
         
     }
     async function sendForm(){
-        let response=await fetch ('http://192.168.1.7:3000/login', {
+        let response= await fetch ('http://192.168.1.7:3000/login', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -46,7 +45,7 @@ const Login = ({navigation}) =>{
             <KeyboardAvoidingView style={[styles.container, styles.back]}>
                 <View style={styles.login_logomarca}>
                     <Image
-                        source={require('../../assets/logo.png')}
+                        source={require('../../assets/logo_nova.png')}
                         style={{ width: 335, height: 285}}
                         PlaceholderContent={<ActivityIndicator />}
                     />
@@ -73,7 +72,7 @@ const Login = ({navigation}) =>{
 }
 const styles = StyleSheet.create({
     back: {
-        
+        backgroundColor: '#3D6DCC',
     },
     login_msg:(text='none')=>({
         fontWeight: 'bold',

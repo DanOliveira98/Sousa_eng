@@ -12,7 +12,7 @@ let role=models.Role;
 let obra=models.Obra;
 
 
-app.get('/create', async(req, res)=>{
+app.get('/create/user', async(req, res)=>{
     let cadastrar = await user.create({ 
         username: "", 
         email: "",
@@ -21,6 +21,27 @@ app.get('/create', async(req, res)=>{
         createdAt: new Date(),
         updatedAt: new Date(),
     });
+})
+app.post('/create/obra', async(req, res)=>{
+    
+    let cadastrar = await obra.create({ 
+        description: req.body.description, 
+        endereco: req.body.endereco,
+        clienteId: req.body.clienteId,
+        userId:req.body.userId,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    });
+})
+app.post('/selected/obra', async(req, res)=>{
+    let response = await obra.findAll({
+        where:{clienteId:req.body.clienteId}
+    })
+    if(response === null){
+        console.log(JSON.stringify('failed'))
+    }else{
+        console.log(response);
+    }
 })
 
 app.get('/selected', async(req, res)=>{
@@ -57,5 +78,5 @@ app.post('/login', async(req, res)=>{
 
 let port=process.env.PORT || 3000;
 app.listen(port,(req, res)=>{
-    console.log('Servidor rodando');
+    
 })

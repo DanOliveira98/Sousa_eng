@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Obra.belongsTo(models.User);
     }
   };
   Obra.init({
@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     photograph: DataTypes.STRING,
     endereco: DataTypes.STRING,
     userId: DataTypes.INTEGER,
-    UserID: DataTypes.INTEGER
+    clienteId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Obra',

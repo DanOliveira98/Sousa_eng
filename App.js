@@ -1,5 +1,5 @@
 import React from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, Permission } from 'react-native';
 import Routes from './src/routes';
 import { Header } from 'react-native-elements';
 import AsyncStorage from '@react-native-community/async-storage'
